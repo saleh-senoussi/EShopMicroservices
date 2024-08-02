@@ -17,7 +17,7 @@ public class DeleteProductCommandHandler(IDocumentSession session)
 {
     public async Task<DeleteProductResult> Handle(DeleteProductCommand command, CancellationToken cancellationToken)
     {
-        var productExists = await session.Query<Product>().Where(p => p.Id == command.Id).AnyAsync(cancellationToken);
+        var productExists = await session.Query<Product>().AnyAsync(p => p.Id == command.Id, cancellationToken);
 
         if (!productExists)
         {
