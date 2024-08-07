@@ -17,8 +17,6 @@ internal class StoreBasketCommandHandler(IBasketRepository repository) : IComman
     public async Task<StoreBasketResult> Handle(StoreBasketCommand command, CancellationToken cancellationToken)
     {
         await repository.StoreBasket(command.Cart, cancellationToken);
-        
-        // ToDo: implement cache
         return new StoreBasketResult(command.Cart.Username);
     }
 }
