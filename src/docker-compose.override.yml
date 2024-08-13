@@ -66,3 +66,19 @@ services:
     volumes:
       - ~/.microsoft/usersecrets:/home/app/.microsoft/usersecrets:ro
       - ~/.aspnet/dev-certs:/dev-certs:ro
+        
+  discount.grpc:
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=8080
+      - ASPNETCORE_HTTPS_PORTS=8081
+      - ASPNETCORE_Kestrel__Certificates__Default__Password=
+      - ASPNETCORE_Kestrel__Certificates__Default__Path=/dev-certs/https/aspnetcore-localhost-CB73470B36959E28E31C67789D5E79D4703B9A42.pfx
+      - ConnectionStrings__Database=Data Source=discountdb
+    ports:
+      - "6002:8080"
+      - "6062:8081"
+    volumes:
+      - ~/.microsoft/usersecrets:/home/app/.microsoft/usersecrets:ro
+      - ~/.aspnet/dev-certs:/dev-certs:ro
+      
