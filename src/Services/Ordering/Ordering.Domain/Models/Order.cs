@@ -17,10 +17,11 @@ public class Order : Aggregate<OrderId>
         private set {}
     }
 
-    public Order Create(CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status)
+    public static Order Create(OrderId orderId, CustomerId customerId, OrderName orderName, Address shippingAddress, Address billingAddress, Payment payment, OrderStatus status = OrderStatus.Draft)
     {
         var order = new Order
         {
+            Id = orderId,
             CustomerId = customerId,
             OrderName = orderName,
             ShippingAddress = shippingAddress,

@@ -9,6 +9,9 @@ services:
     
   distributedcache:
     image: redis
+  
+  orderdb:
+    image: mcr.microsoft.com/azure-sql-edge
 
   catalog.api:
     image: catalog.api
