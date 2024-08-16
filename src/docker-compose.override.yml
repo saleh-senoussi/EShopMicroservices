@@ -31,6 +31,17 @@ services:
     ports:
       - "6379:6379"
   
+  orderdb:
+    container_name: orderdb
+    environment:
+      - ACCEPT_EULA=1
+      - MSSQL_USER=SA
+      - MSSQL_PID=Developer
+      - MSSQL_SA_PASSWORD=WmBNYNrnSYmi6Fy
+    restart: always
+    ports:
+      - "1433:1433"
+  
   catalog.api:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
