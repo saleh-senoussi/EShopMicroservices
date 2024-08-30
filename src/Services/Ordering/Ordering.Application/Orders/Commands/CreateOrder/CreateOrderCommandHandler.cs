@@ -20,14 +20,16 @@ public class CreateOrderCommandHandler(IApplicationDbContext dbContext) : IComma
             orderDto.BillingAddress.EmailAddress, orderDto.BillingAddress.AddressLine,
             orderDto.BillingAddress.Country, orderDto.BillingAddress.State, orderDto.BillingAddress.ZipCode);
 
+        var payment = Payment.Of(orderDto.Payment.CardName, orderDto.Payment.CardNumber, orderDto.Payment.Expiration,
+            orderDto.Payment.Cvv, orderDto.Payment.PaymentMethod);
+
         var newOrder = Order.Create(
             orderId: OrderId.Of(Guid.NewGuid()),
             customerId: CustomerId.Of(orderDto.CustomerId),
             orderName: OrderName.Of(orderDto.OrderName),
             shippingAddress: shippingAddress,
             billingAddress: billingAddress,
-            payment: Payment.Of(orderDto.Payment.CardName, orderDto.Payment.CardNumber, orderDto.Payment.Expiration,
-                orderDto.Payment.Cvv, orderDto.Payment.PaymentMethod)
+            payment: payment
         );
 
         foreach (var orderItemDto in orderDto.OrderItems)
